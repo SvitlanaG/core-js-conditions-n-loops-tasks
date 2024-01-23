@@ -66,8 +66,19 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const queenXPosition = queen.x;
+  const queenYPosition = queen.y;
+  const kingXPosition = king.x;
+  const kingYPosition = king.y;
+
+  const isSameXPosition = queenXPosition === kingXPosition;
+  const isSameYPosition = queenYPosition === kingYPosition;
+  const isSameDiagonal =
+    Math.abs(queenXPosition - kingXPosition) ===
+    Math.abs(queenYPosition - kingYPosition);
+
+  return isSameXPosition || isSameYPosition || isSameDiagonal;
 }
 
 /**
@@ -111,8 +122,31 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const romanOnesNumeralMap = [
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX',
+  ];
+  const romanTensNumeralMap = ['X', 'XX', 'XXX'];
+  const ones = num % 10;
+  const tens = Math.floor(num / 10);
+  let romanNumeral = '';
+  if (num < 10) {
+    romanNumeral = romanOnesNumeralMap[ones - 1];
+  } else if (num % 10 === 0) {
+    romanNumeral = romanTensNumeralMap[tens - 1];
+  } else {
+    romanNumeral =
+      romanTensNumeralMap[tens - 1] + romanOnesNumeralMap[ones - 1];
+  }
+  return romanNumeral;
 }
 
 /**
