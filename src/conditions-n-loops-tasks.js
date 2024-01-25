@@ -164,8 +164,55 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let convertedNumber = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '-':
+        convertedNumber += 'minus';
+        break;
+      case '.':
+      case ',':
+        convertedNumber += 'point';
+        break;
+      case '1':
+        convertedNumber += 'one';
+        break;
+      case '2':
+        convertedNumber += 'two';
+        break;
+      case '3':
+        convertedNumber += 'three';
+        break;
+      case '4':
+        convertedNumber += 'four';
+        break;
+      case '5':
+        convertedNumber += 'five';
+        break;
+      case '6':
+        convertedNumber += 'six';
+        break;
+      case '7':
+        convertedNumber += 'seven';
+        break;
+      case '8':
+        convertedNumber += 'eight';
+        break;
+      case '9':
+        convertedNumber += 'nine';
+        break;
+      case '0':
+        convertedNumber += 'zero';
+        break;
+      default:
+        throw Error('convertNumberToString: value is not specified');
+    }
+    if (i !== numberStr.length - 1) {
+      convertedNumber += ' ';
+    }
+  }
+  return convertedNumber;
 }
 
 /**
@@ -226,8 +273,17 @@ function getIndexOf(str, letter) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let tempNumber = num;
+  while (tempNumber > 0) {
+    const lastDig = tempNumber % 10;
+    if (lastDig === digit) {
+      return true;
+    }
+
+    tempNumber = Math.floor(tempNumber / 10);
+  }
+  return false;
 }
 
 /**
@@ -243,8 +299,21 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  for (let index = 0; index < arr.length; index += 1) {
+    let leftSumElem = 0;
+    let rightSumElem = 0;
+    for (let left = 0; left < index; left += 1) {
+      leftSumElem += arr[left];
+    }
+    for (let right = index + 1; right < arr.length; right += 1) {
+      rightSumElem += arr[right];
+    }
+    if (leftSumElem === rightSumElem) {
+      return index;
+    }
+  }
+  return -1;
 }
 
 /**
